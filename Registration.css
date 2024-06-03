@@ -5,19 +5,19 @@ fieldset {
     margin: 0 auto; 
     /* width: fit-content;  */
   }
-  
-.button {
-    background-color: #04AA6D; /* Green */
-    /* border: none; */
-    color: white;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  .button{
+    background-color: #04AA6D;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
     font-size: 10px;
-    border-radius: 20%;
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
     margin-left: 1%;
+    border-radius: 10px;
   }
+
   .search input{
     width: 50%;
   }
@@ -59,17 +59,45 @@ fieldset {
     text-align: end;
     margin-top: 1%;
   }
-.container{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1%;
- 
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1%;
+  }
   
-}
+  .container button {
+    background-color: #04AA6D;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 14px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  .container button:hover {
+    background-color: #039B60; 
+  }
+  
+  .container button:active {
+    background-color: #028C55; 
+  }
+  
+  .container button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 170, 109, 0.5);
+  }
 
 .field{
   width: 1050px;
 }
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 
   /* .input-row {
     display: flex;

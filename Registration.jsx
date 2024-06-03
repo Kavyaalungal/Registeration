@@ -9,6 +9,8 @@ function Registration() {
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
   const handlePrefixChange = (e) => {
     const prefix = e.target.value;
@@ -28,8 +30,22 @@ function Registration() {
 
     const dateObj = new Date(selectedDate);
     setYear(dateObj.getFullYear());
-    setMonth(('0' + (dateObj.getMonth() + 1)).slice(-2)); // Adding 1 because getMonth() returns month from 0-11
+    setMonth(('0' + (dateObj.getMonth() + 1)).slice(-2)); 
     setDay(('0' + dateObj.getDate()).slice(-2));
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    const number = e.target.value;
+    setPhoneNumber(number);
+  };
+
+  const validatePhoneNumber = () => {
+    const phoneNumberRegex = /^\d{10}$/; // Regex for 10-digit phone number
+    if (!phoneNumberRegex.test(phoneNumber)) {
+      setPhoneNumberError('Please enter a valid 10-digit phone number.');
+    } else {
+      setPhoneNumberError('');
+    }
   };
 
   return (
@@ -65,7 +81,8 @@ function Registration() {
                 <option value="FEMALE">FEMALE</option>
                 <option value="OTHERS">OTHERS</option>
               </select>
-              <input type="date" name="dateofbirth" id="dateofbirth" value={date} onChange={handleDateChange} />
+              <input type="date" name="dateofbirth" id="dateofbirth"
+               value={date} onChange={handleDateChange} />
               <div className="input-group">
                 <input type="text" id="year" placeholder="YYYY" value={year} readOnly />
                 <input type="text" id="month" placeholder="MM" value={month} readOnly />
@@ -74,7 +91,10 @@ function Registration() {
             </div>
           </div>
           <div className='email'>
-            <input type="tel" name="" id="" placeholder='enter your phone number' />
+          <input type="tel" name="phoneNumber" id="phoneNumber"
+           placeholder='enter your phone number' value={phoneNumber} 
+           onChange={handlePhoneNumberChange} onBlur={validatePhoneNumber} />
+            {phoneNumberError && <p className="error">{phoneNumberError}</p>}
             <input type="email" name="" id="" placeholder='enter your email ' />
           </div>
           <textarea name="" id="" cols={150} rows={5}>Enter your address</textarea><br />
@@ -88,8 +108,8 @@ function Registration() {
           </div>
           <div className="container">
             <button>NEW</button>
-            <button>PROCEED TO BUY</button>
-            <button>SAVE & PROCEED TO BUY</button>
+            <button>PROCEED TO BILL</button>
+            <button>SAVE & PROCEED TO BILL</button>
           </div>
         </form>
       </fieldset>
