@@ -16,7 +16,9 @@
   margin-bottom: 20px;
 }
 
-.select select {
+.select select 
+{
+  width: 200px;
   margin-right: 10px;
   padding: 5px;
   height: 40px;
@@ -52,6 +54,8 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+  margin-right: 19%;
+  margin-top: 1%;
 }
 
 .uhid .MuiTextField-root {
@@ -119,3 +123,11 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 170, 109, 0.5);
 }
+
+
+
+
+
+
+
+
