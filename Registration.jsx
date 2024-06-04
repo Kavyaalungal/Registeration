@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import './App.css';
 import './Registration.css';
+import { Link } from 'react-router-dom';
 
 function Registration() {
   const [gender, setGender] = useState('');
@@ -29,32 +30,32 @@ function Registration() {
 
     const dateObj = new Date(selectedDate);
     setYear(dateObj.getFullYear());
-    setMonth(('0' + (dateObj.getMonth() + 1)).slice(-2)); 
+    setMonth(('0' + (dateObj.getMonth() + 1)).slice(-2));
     setDay(('0' + dateObj.getDate()).slice(-2));
   };
 
-  const handlePhoneNumberChange = (e) => {
-    const number = e.target.value;
-    setPhoneNumber(number);
-  };
+  // const handlePhoneNumberChange = (e) => {
+  //   const number = e.target.value;
+  //   setPhoneNumber(number);
+  // };
 
-  const validatePhoneNumber = () => {
-    const phoneNumberRegex = /^\d{10}$/; 
-    if (!phoneNumberRegex.test(phoneNumber)) {
-      setPhoneNumberError('Please enter a valid 10-digit phone number.');
-    } else if (!/^\d+$/.test(phoneNumber)) {
-      setPhoneNumberError('Phone number should contain only digits.');
-    } else {
-      setPhoneNumberError('');
-    }
-  };
+  // const validatePhoneNumber = () => {
+  //   const phoneNumberRegex = /^\d{10}$/;
+  //   if (!phoneNumberRegex.test(phoneNumber)) {
+  //     setPhoneNumberError('Please enter a valid 10-digit phone number.');
+  //   } else if (!/^\d+$/.test(phoneNumber)) {
+  //     setPhoneNumberError('Phone number should contain only digits.');
+  //   } else {
+  //     setPhoneNumberError('');
+  //   }
+  // };
 
   return (
     <>
       <fieldset className='fieldset'>
         <legend>Search</legend>
         <div className='search'>
-          <TextField id="outlined-basic" label="Search" variant="outlined" size="small" />
+          <TextField id="outlined-basic" label="Search" className='search' variant="outlined" size="small" />
           <button className='button'>Search</button>
         </div>
         <div className="uhid">
@@ -71,10 +72,9 @@ function Registration() {
               <option value="MRS:">MRS:</option>
               <option value="MISS:">MISS:</option>
             </select>
-            <TextField className='name' id="outlined-basic" label="Enter your name" variant="outlined" size="small"/>
+            <TextField className='name' id="outlined-basic" label="Enter your name" variant="outlined" size="small" />
           </div>
           <div className="input-row">
-       
             <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
               <option value="">---</option>
               <option value="MALE">MALE</option>
@@ -104,9 +104,9 @@ function Registration() {
               type="tel"
               variant="outlined"
               size="small"
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
-              onBlur={validatePhoneNumber}
+              // value={phoneNumber}
+              // onChange={handlePhoneNumberChange}
+              // onBlur={validatePhoneNumber}
               fullWidth
             />
             <TextField id="email" label="Email" type="email" variant="outlined" size="small" fullWidth />
@@ -135,12 +135,13 @@ function Registration() {
             />
           </div>
           <div className='link'>
-            <a href="https://www.example.com">
-              <button type="button" className='button'>
-                Additional details
-              </button>
-            </a>
-          </div>
+        {/* Use Link component for navigation */}
+        <Link to="/additional-details">
+          <button className='button'>
+            Additional details
+          </button>
+        </Link>
+      </div>
           <div className="container">
             <button type="button" className='button'>NEW</button>
             <button type="button" className='button'>PROCEED TO BILL</button>
