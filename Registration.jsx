@@ -1,5 +1,5 @@
-import React, { useState } from 'react'; // Import React
-
+import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
 import './App.css';
 import './Registration.css';
 
@@ -14,7 +14,6 @@ function Registration() {
 
   const handlePrefixChange = (e) => {
     const prefix = e.target.value;
-    console.log(`Selected prefix: ${prefix}`);
     if (prefix === 'MR:') {
       setGender('MALE');
     } else if (prefix === 'MRS:' || prefix === 'MISS:') {
@@ -40,9 +39,11 @@ function Registration() {
   };
 
   const validatePhoneNumber = () => {
-    const phoneNumberRegex = /^\d{10}$/; // Regex for 10-digit phone number
+    const phoneNumberRegex = /^\d{10}$/; 
     if (!phoneNumberRegex.test(phoneNumber)) {
       setPhoneNumberError('Please enter a valid 10-digit phone number.');
+    } else if (!/^\d+$/.test(phoneNumber)) {
+      setPhoneNumberError('Phone number should contain only digits.');
     } else {
       setPhoneNumberError('');
     }
@@ -50,66 +51,100 @@ function Registration() {
 
   return (
     <>
-      <fieldset className='field'>
+      <fieldset className='fieldset'>
         <legend>Search</legend>
         <div className='search'>
-          <input type="text" name="" id="" placeholder='search here' />
-          <button className='button'>search</button>
+          <TextField id="outlined-basic" label="Search" variant="outlined" size="small" />
+          <button className='button'>Search</button>
         </div>
         <div className="uhid">
-          <label htmlFor="uhid">UHID:</label>
-          <input type="text" name="" id="" />
+          <TextField id="outlined-basic" label="UHID" variant="outlined" size="small" />
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset className='fieldset'>
         <legend>Patient details:</legend>
-        <form action="">
-          <div className='select'>
+        <form>
+          <div className='select input-row'>
             <select name="" id="" onChange={handlePrefixChange}>
               <option value="">---</option>
               <option value="MR:">MR:</option>
               <option value="MRS:">MRS:</option>
               <option value="MISS:">MISS:</option>
             </select>
-            <input type="text" name="name" id="name" placeholder='Enter your name' />
+            <TextField className='name' id="outlined-basic" label="Enter your name" variant="outlined" size="small"/>
           </div>
           <div className="input-row">
-            <div className='gender'>
-              <select name="" id="" value={gender} onChange={(e) => setGender(e.target.value)}>
-                <option value="">---</option>
-                <option value="MALE">MALE</option>
-                <option value="FEMALE">FEMALE</option>
-                <option value="OTHERS">OTHERS</option>
-              </select>
-              <input type="date" name="dateofbirth" id="dateofbirth"
-               value={date} onChange={handleDateChange} />
-              <div className="input-group">
-                <input type="text" id="year" placeholder="YYYY" value={year} readOnly />
-                <input type="text" id="month" placeholder="MM" value={month} readOnly />
-                <input type="text" id="day" placeholder="DD" value={day} readOnly />
-              </div>
+       
+            <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">---</option>
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+              <option value="OTHERS">OTHERS</option>
+            </select>
+            <TextField
+              id="dateofbirth"
+              label="DOB"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              variant="outlined"
+              size="small"
+              value={date}
+              onChange={handleDateChange}
+            />
+            <div className="input-group">
+              <TextField id="year" label="YYYY" variant="outlined" value={year} InputProps={{ readOnly: true }} size="small" />
+              <TextField id="month" label="MM" variant="outlined" value={month} InputProps={{ readOnly: true }} size="small" />
+              <TextField id="day" label="DD" variant="outlined" value={day} InputProps={{ readOnly: true }} size="small" />
             </div>
           </div>
-          <div className='email'>
-          <input type="tel" name="phoneNumber" id="phoneNumber"
-           placeholder='enter your phone number' value={phoneNumber} 
-           onChange={handlePhoneNumberChange} onBlur={validatePhoneNumber} />
+          <div className="email input-row">
+            <TextField
+              id="phoneNumber"
+              label="Phone"
+              type="tel"
+              variant="outlined"
+              size="small"
+              value={phoneNumber}
+              onChange={handlePhoneNumberChange}
+              onBlur={validatePhoneNumber}
+              fullWidth
+            />
+            <TextField id="email" label="Email" type="email" variant="outlined" size="small" fullWidth />
             {phoneNumberError && <p className="error">{phoneNumberError}</p>}
-            <input type="email" name="" id="" placeholder='enter your email ' />
           </div>
-          <textarea name="" id="" cols={150} rows={5}>Enter your address</textarea><br />
-          <textarea name="" id="" cols={150} rows={5}>Enter any notes</textarea>
+          <div className="input-row">
+            <TextField
+              id="address"
+              label="Address"
+              variant="outlined"
+              size="small"
+              multiline
+              rows={4}
+              fullWidth
+            />
+          </div>
+          <div className="input-row">
+            <TextField
+              id="notes"
+              label="Notes"
+              variant="outlined"
+              size="small"
+              multiline
+              rows={4}
+              fullWidth
+            />
+          </div>
           <div className='link'>
             <a href="https://www.example.com">
-              <button>
+              <button type="button" className='button'>
                 Additional details
               </button>
             </a>
           </div>
           <div className="container">
-            <button>NEW</button>
-            <button>PROCEED TO BILL</button>
-            <button>SAVE & PROCEED TO BILL</button>
+            <button type="button" className='button'>NEW</button>
+            <button type="button" className='button'>PROCEED TO BILL</button>
+            <button type="button" className='button'>SAVE & PROCEED TO BILL</button>
           </div>
         </form>
       </fieldset>
